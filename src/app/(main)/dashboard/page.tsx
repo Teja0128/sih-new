@@ -1,4 +1,6 @@
 'use client';
+
+import { useEffect, useState } from 'react';
 import DoctorDashboard from './doctor-dashboard';
 import PatientDashboard from './patient-dashboard';
 import { samplePatientFiles } from '@/lib/patient-data';
@@ -11,19 +13,26 @@ type DashboardPageProps = {
 
 export default function DashboardPage({ searchParams }: DashboardPageProps) {
   const role = searchParams?.role || 'doctor';
+  const [patientFiles, setPatientFiles] = useState([]);
+  const [doctorFiles, setDoctorFiles] = useState([]);
+
+  useEffect(() => {
+    if (role === 'patient') {
+      setPatientFiles(samplePatientFiles.filter(file => file.id === 'PAT-001'));
+    } else {
+      setDoctorFiles(
+        samplePatientFiles.filter(
+          file =>
+            file.id.toLowerCase().includes(''.toLowerCase()) ||
+            file.patientName.toLowerCase().includes(''.toLowerCase())
+        )
+      );
+    }
+  }, [role]);
 
   if (role === 'patient') {
-    // In a real app, you would fetch this data based on the logged-in user
-    const patientFiles = samplePatientFiles.filter(file => file.id === "PAT-001");
     return <PatientDashboard files={patientFiles} />;
   }
-  
-  // In a real app, you would fetch this data from a database
-  const files = samplePatientFiles.filter(
-    (file) =>
-      file.id.toLowerCase().includes("".toLowerCase()) ||
-      file.patientName.toLowerCase().includes("".toLowerCase())
-  );
 
-  return <DoctorDashboard files={files} />;
+  return <DoctorDashboard files={doctorFiles} />;
 }
