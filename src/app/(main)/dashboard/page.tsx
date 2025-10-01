@@ -1,4 +1,4 @@
-
+"use client";
 import DoctorDashboard from './doctor-dashboard';
 import PatientDashboard from './patient-dashboard';
 import { samplePatientFiles } from '@/lib/patient-data';
