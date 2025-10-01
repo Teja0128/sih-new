@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import DashboardPageClient from './DashboardPageClient';
+import DashboardPageClient from './DashboardPageClient'; // client component
 
 export default function DashboardPage({ searchParams }) {
   return (

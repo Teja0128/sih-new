@@ -27,7 +27,9 @@ export default function PatientsPage({ searchParams }: PatientsPageProps) {
             Search, view, and manage patient files.
           </p>
         </div>
-        <PatientSearch placeholder="Search by Patient ID or Name..." />
+        <Suspense fallback={<div>Loading Search...</div>}>
+          <PatientSearch placeholder="Search by Patient ID or Name..." />
+        </Suspense>
       </div>
 
       <Card>

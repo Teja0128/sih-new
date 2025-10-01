@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 import LoginForm from "./login-form";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -39,7 +38,6 @@ function LoginSkeleton() {
     </div>
   );
 }
-
 
 export default function LoginPageContainer() {
   return (

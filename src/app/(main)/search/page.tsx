@@ -34,7 +34,9 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
         </p>
       </div>
 
-      <SearchForm initialQuery={query} initialFilter={filter} />
+      <Suspense fallback={<Skeleton className="h-12 w-full" />}>
+        <SearchForm initialQuery={query} initialFilter={filter} />
+      </Suspense>
 
       <Card>
         <CardContent className="pt-6">
