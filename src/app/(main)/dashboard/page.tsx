@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import DoctorDashboard from './doctor-dashboard';
 import PatientDashboard from './patient-dashboard';
 import { samplePatientFiles } from '@/lib/patient-data';
@@ -9,7 +9,7 @@ type DashboardPageProps = {
   };
 };
 
-export default async function DashboardPage({ searchParams }: DashboardPageProps) {
+export default function DashboardPage({ searchParams }: DashboardPageProps) {
   const role = searchParams?.role || 'doctor';
 
   if (role === 'patient') {
