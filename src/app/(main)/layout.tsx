@@ -23,7 +23,7 @@ import Link from 'next/link';
 import Chatbot from '@/components/chatbot/chatbot';
 import BottomNav from '@/components/layout/bottom-nav';
 
-export default function MainLayout({
+function MainLayoutContent({
   children,
 }: {
   children: React.ReactNode;
@@ -32,7 +32,7 @@ export default function MainLayout({
   const role = searchParams.get('role') || 'doctor';
 
   return (
-    <SidebarProvider>
+    <>
       <Sidebar>
         <SidebarHeader>
           <Link href={`/?role=${role}`} className="flex items-center gap-2">
@@ -41,11 +41,9 @@ export default function MainLayout({
           </Link>
         </SidebarHeader>
         <Separator />
-        <Suspense fallback={<div>Loading navigation...</div>}>
-          <SidebarContent>
-            {role === 'doctor' ? <DoctorSidebarNav /> : <PatientSidebarNav />}
-          </SidebarContent>
-        </Suspense>
+        <SidebarContent>
+          {role === 'doctor' ? <DoctorSidebarNav /> : <PatientSidebarNav />}
+        </SidebarContent>
         <Separator />
         <SidebarFooter>
           <Button variant="ghost" className="w-full justify-start" asChild>
@@ -57,17 +55,31 @@ export default function MainLayout({
         </SidebarFooter>
       </Sidebar>
       <SidebarInset className="flex flex-col bg-muted/40">
-        <Suspense fallback={<div>Loading header...</div>}>
-          <AppHeader />
-        </Suspense>
+        <AppHeader />
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-20 md:pb-8">
           <div className="mx-auto max-w-7xl">{children}</div>
         </main>
         <Chatbot />
-        <Suspense fallback={<div>Loading bottom navigation...</div>}>
-          <BottomNav />
-        </Suspense>
+        <BottomNav />
       </SidebarInset>
+    </>
+  );
+}
+
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <SidebarProvider>
+      <Suspense fallback={
+        <div className="flex h-screen w-full items-center justify-center">
+          <div className="text-center">Loading...</div>
+        </div>
+      }>
+        <MainLayoutContent>{children}</MainLayoutContent>
+      </Suspense>
     </SidebarProvider>
   );
 }

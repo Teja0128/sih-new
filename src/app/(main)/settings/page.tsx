@@ -1,6 +1,7 @@
 
 "use client";
 
+import { Suspense } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -197,7 +198,7 @@ const PatientSettings = () => {
 }
 
 
-export default function SettingsPage() {
+function SettingsContent() {
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const role = searchParams.get('role') || 'doctor';
@@ -233,7 +234,6 @@ export default function SettingsPage() {
       description: "Your appearance preferences have been saved.",
     });
   }
-
 
   return (
     <div className="space-y-8">
@@ -303,7 +303,21 @@ export default function SettingsPage() {
             </Button>
         </CardContent>
       </Card>
-
     </div>
+  );
+}
+
+export default function SettingsPage() {
+  return (
+    <Suspense fallback={
+      <div className="space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+          <p className="text-muted-foreground">Loading settings...</p>
+        </div>
+      </div>
+    }>
+      <SettingsContent />
+    </Suspense>
   );
 }
