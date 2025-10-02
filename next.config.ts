@@ -1,6 +1,14 @@
 
 import type {NextConfig} from 'next';
 
+const replitDomains = process.env.REPLIT_DOMAINS?.split(',') || [];
+const allowedOrigins = [
+  ...replitDomains,
+  '*.replit.dev',
+  'localhost',
+  '127.0.0.1',
+];
+
 const nextConfig: NextConfig = {
   /* config options here */
   typescript: {
@@ -9,7 +17,7 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  allowedDevOrigins: ['*'],
+  allowedDevOrigins: allowedOrigins,
   serverExternalPackages: ['genkit', '@genkit-ai/core', '@genkit-ai/googleai'],
   images: {
     remotePatterns: [
