@@ -50,7 +50,7 @@ The application uses Google Genkit AI which requires:
 
 ### Next.js Configuration
 - TypeScript and ESLint build errors ignored for flexibility
-- Configured for Replit proxy with experimental.allowedDevOrigins
+- Configured for Replit proxy with `allowedDevOrigins` (dynamically includes REPLIT_DOMAINS)
 - External packages configured for Genkit AI
 - Remote image patterns configured for various CDNs
 
@@ -75,6 +75,14 @@ The application uses Google Genkit AI which requires:
 - **Font**: Alegreya (humanist serif)
 
 ## Recent Changes
+*October 2, 2025*
+- Fresh GitHub import setup for Replit environment
+- Installed all npm dependencies (952 packages)
+- Fixed Next.js 15.3.3 `allowedDevOrigins` configuration to use dynamic REPLIT_DOMAINS
+- Verified workflow running on port 5000 with 0.0.0.0 host
+- Configured autoscale deployment with build and start commands
+- Application tested and running successfully
+
 *September 30, 2025*
 - Imported GitHub project to Replit environment
 - Configured Next.js for Replit proxy (port 5000, host 0.0.0.0)
